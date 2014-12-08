@@ -1,17 +1,16 @@
-
 (function () {
   // config
   var config = {
-    challengeUrl: '//',
-    expectCss: "./node_modules/mocha/mocha.css",
-    expectJs: "./node_modules/mocha/mocha.js",
+    testUrl: '//localhost:3000/test.js',
+    expectCss: "//cdnjs.cloudflare.com/ajax/libs/mocha/2.0.1/mocha.css",
+    expectJs: "//cdnjs.cloudflare.com/ajax/libs/mocha/2.0.1/mocha.js",
     scriptTimeout: 3000
   };
 
   var callback = function() {
     mocha.setup('bdd');
 
-    loadScript("./test.js", function() {
+    loadScript(config.testUrl, function() {
       var runner = mocha.run();
     });
   }
