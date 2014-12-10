@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var callback, config, body, testdiv;
+  var afterLoad, config, body, testdiv;
 
   // config
   config = {
@@ -13,15 +13,25 @@
   };
 
   function addDomStuff() {
-    body = document.getElementsByTagName("body")[0];
+    if (document.querySelectorAll('#mocha').length == 0) {
+      body = document.getElementsByTagName("body")[0];
 
-    testdiv = document.createElement("div");
-    testdiv.id = "mocha";
+      testdiv = document.createElement("div");
+      testdiv.id = "mocha";
 
-    body.appendChild(testdiv);
+      testdiv.style.position = "fixed";
+      testdiv.style.top = 0;
+      testdiv.style.right = 0;
+      testdiv.style.height = "100%";
+      testdiv.style.width = "420px";
+      testdiv.style.overflow = "scroll";
+      testdiv.style.background = "white";
+
+      body.appendChild(testdiv);
+    }
   }
 
-  function callback() {
+  function afterLoad() {
     mocha.setup('bdd');
     window.expect = chai.expect;
 
@@ -39,7 +49,7 @@
 
       script.onload = function() {
         resolve();
-      }
+      };
 
       document.getElementsByTagName("head")[0].appendChild(script);
     });
@@ -68,6 +78,6 @@
 
   addDomStuff();
   loadStylesheet(config.expectCss);
-  loadScripts([config.expectJs, config.assertJs], callback);
+  loadScripts([config.expectJs, config.assertJs], afterLoad);
 
 })();
