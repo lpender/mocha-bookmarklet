@@ -5,7 +5,7 @@
 
   // config
   config = {
-    testUrl: '//localhost:3000/test.js',
+    testUrl: "//localhost:3000/test.js",
     expectCss: "//cdnjs.cloudflare.com/ajax/libs/mocha/2.0.1/mocha.css",
     expectJs: "//cdnjs.cloudflare.com/ajax/libs/mocha/2.0.1/mocha.js",
     assertJs: "//cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.min.js",
@@ -14,7 +14,7 @@
   };
 
   function addDomStuff() {
-    if (Sizzle('#mocha').length === 0) {
+    if (document.querySelectorAll("#mocha").length === 0) {
       body = document.getElementsByTagName("body")[0];
 
       testdiv = document.createElement("div");
@@ -33,7 +33,7 @@
   };
 
   function afterLoad() {
-    mocha.setup('bdd');
+    mocha.setup("bdd");
     window.expect = chai.expect;
 
     loadScript(config.testUrl).then(function () {
